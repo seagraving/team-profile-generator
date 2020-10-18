@@ -36,5 +36,5 @@ team consists of a manager, and any number of engineers and interns.
 
 ### Final Product Visual Example
 
-![Team](Assets\spongeteam.png)
+![spongeteam](https://user-images.githubusercontent.com/67175494/96378766-e8c34080-1153-11eb-82ee-2b432850ceb0.png)
 
