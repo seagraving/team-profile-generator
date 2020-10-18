@@ -117,7 +117,12 @@ function addIntern() {
 }
 
 function exitToTeam() {
-
+console.log(employee_db)
+const teamData = render(employee_db)
+fs.writeFile(outputPath, teamData, function(error){
+    if (error) throw error
+    console.log("Success!")
+})
 }
 start();
 // After the user has input all employees desired, call the `render` function (required
