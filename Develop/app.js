@@ -11,9 +11,115 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
 
+const employee_db = []
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+function start() {
+    inquirer
+        .prompt({
+            name: "toDo",
+            //   list or input for type?
+            type: "list",
+            message: "What would you like to do?",
+            choices: ["Add Manager", "Add Engineer", "Add Intern", "Exit"]
+        })
+        .then(function (answer) {
+            // based on their answer, either call the bid or the post functions
+            switch (answer.toDo) {
+                case "Add Manager":
+                    addManager()
+                    break
+                case "Add Engineer":
+                    addEngineer()
+                    break
+                case "Add Intern":
+                    addIntern()
+                    break
+                case "Exit":
+                    exitToTeam()
+                    break
+            }
+        });
+}
 
+function addManager() {
+    inquirer.prompt([{
+        name: "name",
+        type: "input",
+        message: "What is the Manager's name?"
+    }, {
+        name: "id",
+        type: "input",
+        message: "What is the Manager's ID?"
+
+    }, {
+        name: "email",
+        type: "input",
+        message: "What is the Manager's email?"
+    }, {
+        name: "office",
+        type: "input",
+        message: "What is the Manager's office number?"
+    }]).then(function(answer){
+        const newManager = new Manager(answer.name, answer.id, answer.email, answer.office)
+        employee_db.push(newManager)
+        start(); 
+    }) 
+}
+
+function addEngineer(){
+    inquirer.prompt ([{
+        name: "name",
+        type: "input",
+        message: "What is the Engineer's name?"
+    }, {
+        name: "id",
+        type: "input",
+        message: "What is the Engineer's ID?"
+    }, {
+        name: "email",
+        type: "input",
+        message: "What is the Engineer's email?"
+    }, {
+        name: "github",
+        type: "input",
+        message: "What is the Engineer's GitHub username?"
+    }]).then(function(answer){
+        const newEngineer = new Engineer(answer.name, answer.id, answer.email, answer.github)
+        employee_db.push(newEngineer)
+        start();
+    })
+}
+
+function addIntern() {
+    inquirer.prompt ([{
+        name: "name",
+        type: "input",
+        message: "What is the Intern's name?"
+    }, {
+        name: "id",
+        type: "input",
+        message: "What is the Intern ID?"
+    }, {
+        name: "email",
+        type: "input",
+        message: "What is the Intern's email?"
+    }, {
+        name: "school",
+        type: "input",
+        message: "What is the Intern's school name?"
+    }]).then(function(answer){
+        const newIntern = new Intern(answer.name, answer.id, answer.email, answer.school)
+        employee_db.push(newIntern)
+        start();
+    })
+}
+
+function exitToTeam() {
+
+}
+start();
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
